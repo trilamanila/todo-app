@@ -32,14 +32,20 @@ function App() {
     });
     todoNameRef.current.value = null;
   }
+
+  function handleClearTodos() {
+    const newTodos = todos.filter(todo => !todo.complete);
+    setTodos(newTodos);
+  }
+
   return (
     <>
       <div className="app">
         <TodoList todos={todos} toggleTodo={toggleTodo} />
         <input ref={todoNameRef} type="text" />
         <button onClick={handleAddTodo}>Add Todo</button>
-        <button>Clear Complete</button>
-        <div>0 left to do</div>
+        <button onClick={handleClearTodos}>Clear Complete</button>
+        <div>{todos.filter(todo => !todo.complete).length} left to do</div>
       </div>
     </>
   );
